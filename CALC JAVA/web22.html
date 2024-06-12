@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="web2.css">
+</head>
+
+<body>
+    <div class="products">
+        <div class="product" data-name="iPhone 13 Pro" data-price="900">
+            <img src="iphone-13.jpg" alt="iPhone 13 Pro">
+            <p>iPhone 13 Pro</p>
+            <p>900jd</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+        <div class="product" data-name="Headset" data-price="150">
+            <img src="headset.jpg" alt="Headset">
+            <p>Headset</p>
+            <p>150jd</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+        <div class="product" data-name="Keyboard" data-price="60">
+            <img src="keyboard.jpg" alt="Keyboard">
+            <p>Keyboard</p>
+            <p>60jd</p>
+            <button class="add-to-cart">Add to cart</button>
+        </div>
+    </div>
+
+    <div class="cart">
+        <h2>Cart</h2>
+        <div class="cart-items"></div>
+        <div class="cart-total">
+            <p>Total: <span id="total">0</span>jd</p>
+            <button id="save">Save</button>
+        </div>
+    </div>
+
+    <script src="script2.js"></script>
+</body>
+
+</html>

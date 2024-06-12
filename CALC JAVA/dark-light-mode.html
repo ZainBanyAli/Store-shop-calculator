@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="toggle.css">
+</head>
+
+<body>
+    <div id="toggle">
+        <div class="indicator"></div>
+    </div>
+    <script>
+        const body = document.querySelector('body');
+        const toggle = document.getElementById('toggle');
+        const indicator = document.querySelector('.indicator');
+
+        // Function to set the mode based on session storage
+        function setMode() {
+            const mode = sessionStorage.getItem('mode');
+            if (mode === 'dark') {
+                toggle.classList.add('active');
+                body.classList.add('active');
+                indicator.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
+                body.classList.remove('active');
+                indicator.classList.remove('active');
+            }
+        }
+
+        // Set the initial mode on page load
+        setMode();
+
+        // Toggle the mode and save to session storage
+        toggle.onclick = function () {
+            toggle.classList.toggle('active');
+            body.classList.toggle('active');
+            indicator.classList.toggle('active');
+
+            // Save the current mode to session storage
+            if (body.classList.contains('active')) {
+                sessionStorage.setItem('mode', 'dark');
+            } else {
+                sessionStorage.setItem('mode', 'light');
+            }
+        }
+    </script>
+</body>
+
+</html>

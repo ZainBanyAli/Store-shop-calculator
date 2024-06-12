@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-rows: 20% 20% 20% 20%;
+            grid-template-columns: 20% 20% 20% 20%;
+            gap: 4px;
+            background-color: aquamarine;
+            height: 500px;
+            width: 450px;
+            align-items: center;
+            margin-left: 550px;
+            margin-top: 150px;
+            padding: 10px;
+            box-shadow: 3px 3px 10px rgba(43, 36, 36, 0.2);
+        }
+
+        .div0 {
+            grid-row-start: 1;
+            grid-column-start: 1;
+            grid-column-end: 5;
+            background-color: rgb(190, 190, 175);
+            padding: 20px 10px;
+            width: 390px;
+            height: 40px;
+            background-color: rgb(190, 190, 175);
+            margin: auto;
+            box-shadow: 3px 3px gray;
+            text-align: right;
+            font-size: 24px;
+            line-height: 40px;
+        }
+
+        .button {
+            padding: 10px;
+            margin-left: 20px;
+            width: 50px;
+            height: 50px;
+            box-shadow: 3px 3px gray;
+            background-color: rgb(190, 190, 175);
+            text-align: center;
+            line-height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .operator {
+            background-color: yellow;
+        }
+
+        .clear {
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(48, 240, 144);">
+    <div class="grid-container">
+        <div id="display" class="div0">0</div>
+        <div id="btn1" class="button">1</div>
+        <div id="btn2" class="button">2</div>
+        <div id="btn3" class="button">3</div>
+        <div id="btnAdd" class="button operator">+</div>
+        <div id="btn4" class="button">4</div>
+        <div id="btn5" class="button">5</div>
+        <div id="btn6" class="button">6</div>
+        <div id="btnSub" class="button operator">-</div>
+        <div id="btn7" class="button">7</div>
+        <div id="btn8" class="button">8</div>
+        <div id="btn9" class="button">9</div>
+        <div id="btnMul" class="button operator">*</div>
+        <div id="btnClear" class="button clear">C</div>
+        <div id="btn0" class="button">0</div>
+        <div id="btnEqual" class="button">=</div>
+        <div id="btnDiv" class="button operator">/</div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentInput = '';
+        let currentOperator = '';
+        let firstOperand = null;
+
+        const updateDisplay = (text) => {
+            display.textContent = text;
+        };
+
+        const handleNumberClick = (num) => {
+            if (currentInput === '0' || currentInput === '') {
+                currentInput = num;
+            } else {
+                currentInput += num;
+            }
+            updateDisplay(currentInput);
+        };
+
+        const handleOperatorClick = (operator) => {
+            if (firstOperand === null) {
+                firstOperand = parseFloat(currentInput);
+                currentInput = '';
+            }
+            currentOperator = operator;
+        };
+
+        const handleEqualClick = () => {
+            if (firstOperand !== null && currentOperator !== '' && currentInput !== '') {
+                let secondOperand = parseFloat(currentInput);
+                let result;
+                switch (currentOperator) {
+                    case '+':
+                        result = firstOperand + secondOperand;
+                        break;
+                    case '-':
+                        result = firstOperand - secondOperand;
+                        break;
+                    case '*':
+                        result = firstOperand * secondOperand;
+                        break;
+                    case '/':
+                        result = firstOperand / secondOperand;
+                        break;
+                }
+                updateDisplay(result);
+                currentInput = result.toString();
+                firstOperand = null;
+                currentOperator = '';
+            }
+        };
+
+        const handleClearClick = () => {
+            currentInput = '';
+            currentOperator = '';
+            firstOperand = null;
+            updateDisplay('0');
+        };
+
+        document.getElementById('btn0').onclick = () => handleNumberClick('0');
+        document.getElementById('btn1').onclick = () => handleNumberClick('1');
+        document.getElementById('btn2').onclick = () => handleNumberClick('2');
+        document.getElementById('btn3').onclick = () => handleNumberClick('3');
+        document.getElementById('btn4').onclick = () => handleNumberClick('4');
+        document.getElementById('btn5').onclick = () => handleNumberClick('5');
+        document.getElementById('btn6').onclick = () => handleNumberClick('6');
+        document.getElementById('btn7').onclick = () => handleNumberClick('7');
+        document.getElementById('btn8').onclick = () => handleNumberClick('8');
+        document.getElementById('btn9').onclick = () => handleNumberClick('9');
+
+        document.getElementById('btnAdd').onclick = () => handleOperatorClick('+');
+        document.getElementById('btnSub').onclick = () => handleOperatorClick('-');
+        document.getElementById('btnMul').onclick = () => handleOperatorClick('*');
+        document.getElementById('btnDiv').onclick = () => handleOperatorClick('/');
+
+        document.getElementById('btnEqual').onclick = handleEqualClick;
+        document.getElementById('btnClear').onclick = handleClearClick;
+    </script>
+</body>
+
+</html>
